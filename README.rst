@@ -8,15 +8,16 @@
 .. image:: https://codecov.io/gh/infrascloudy/python-project-template/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/infrascloudy/python-project-template
   
-.. image:: https://img.shields.io/lgtm/alerts/g/infrascloudy/python-project-template.svg
-  :target: https://lgtm.com/projects/g/infrascloudy/python-project-template/alerts/
+.. image:: https://img.shields.io/lgtm/grade/javascript/g/infrascloudy/gandalf.svg
+  :target: https://lgtm.com/projects/g/infrascloudy/gandalf/context:javascript
 
-.. image:: https://img.shields.io/lgtm/grade/javascript/g/infrascloudy/python-project-template.svg
-  :target: https://lgtm.com/projects/g/infrascloudy/python-project-template/context:python
+.. image:: https://img.shields.io/lgtm/grade/python/g/infrascloudy/gandalf.svg
+  :target: https://lgtm.com/projects/g/infrascloudy/gandalf/context:python
 
 .. image:: https://readthedocs.org/projects/pygandalf/badge/?version=latest
   :target: https://pygandalf.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
+
 
 This project provides a best-practices template Python project which integrates several different tools. It saves you work by setting up a number of things, including documentation, code checking, and unit test runners.
 

@@ -263,13 +263,7 @@ setup_dict = dict(
     cmdclass={'test': TestAllCommand},
     zip_safe=False,  # don't use eggs
     entry_points={
-        'console_scripts': [
-            'gandalf_cli = gandalf.main:entry_point'
-        ],
-        # if you have a gui, use this
-        # 'gui_scripts': [
-        #     'gandalf_gui = gandalf.gui:entry_point'
-        # ]
+        'console_scripts': ['gandalf = gandalf.console.cli'],
     }
 )
 
