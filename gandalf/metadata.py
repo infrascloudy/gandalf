@@ -8,8 +8,12 @@ Information describing the project.
 package = "gandalf"
 project = "Providing Blazingly fast & beautifully expressive Web Apps and APIs"
 project_no_spaces = project.replace(" ", "")
-version = "0.1.4"
-description = "Blazingly fast & beautifully expressive Web Apps and APIs"
+version = "0.1.5"
+description = (
+    "Simple and rapid application development framework, built on top of Flask."
+    " includes detailed security, auto CRUD generation for your models,"
+    " google charts and much more."
+)
 authors = ["Infrascloudy"]
 authors_string = ", ".join(authors)
 emails = ["support@infrascloudy.io"]

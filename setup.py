@@ -268,7 +268,7 @@ setup_dict = dict(
     tests_require=["pytest==3.0.6", "mock==2.0.0", "flake8==2.1.0"],
     cmdclass={"test": TestAllCommand},
     zip_safe=False,  # don't use eggs
-    entry_points={"console_scripts": ["gandalf = gandalf.console.cli"]},
+    entry_points={"console_scripts": ["gandalf = gandalf.console:cli"]},
 )
 
 

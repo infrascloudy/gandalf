@@ -42,5 +42,5 @@ def cli():
     cli_app()
 
 
-if __name__ == '__main':
+if __name__ == "__main":
     cli_app()
