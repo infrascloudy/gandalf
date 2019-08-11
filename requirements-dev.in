@@ -1,5 +1,5 @@
 # Runtime requirements
---requirement requirements.txt
+--requirement requirements.in
 
 # Testing
 pytest==5.0.0
@@ -12,6 +12,8 @@ pip-tools
 
 # Linting
 flake8==3.7.7
+black
+bumpversion
 mccabe==0.6.1
 pep8==1.7.1
 pyflakes==2.1.1

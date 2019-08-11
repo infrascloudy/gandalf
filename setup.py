@@ -7,15 +7,17 @@ from importlib.machinery import SourceFileLoader
 import subprocess
 
 ## Python 2.6 subprocess.check_output compatibility. Thanks Greg Hewgill!
-if 'check_output' not in dir(subprocess):
+if "check_output" not in dir(subprocess):
+
     def check_output(cmd_args, *args, **kwargs):
         proc = subprocess.Popen(
-            cmd_args, *args,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs)
+            cmd_args, *args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs
+        )
         out, err = proc.communicate()
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(args)
         return out
+
     subprocess.check_output = check_output
 
 from setuptools import setup, find_packages
@@ -24,6 +26,7 @@ from distutils import spawn
 
 try:
     import colorama
+
     colorama.init()  # Initialize colorama on Windows
 except ImportError:
     # Don't require colorama just for running paver tasks. This allows us to
@@ -32,13 +35,13 @@ except ImportError:
     pass
 
 # Add the current directory to the module search path.
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath("."))
 
 ## Constants
-CODE_DIRECTORY = 'gandalf'
-DOCS_DIRECTORY = 'docs'
-TESTS_DIRECTORY = 'tests'
-PYTEST_FLAGS = ['--doctest-modules']
+CODE_DIRECTORY = "gandalf"
+DOCS_DIRECTORY = "docs"
+TESTS_DIRECTORY = "tests"
+PYTEST_FLAGS = ["--doctest-modules"]
 
 # Import metadata. Normally this would just be:
 #
@@ -51,10 +54,13 @@ PYTEST_FLAGS = ['--doctest-modules']
 # instead, effectively side-stepping the dependency problem. Please make sure
 # metadata has no dependencies, otherwise they will need to be added to
 # the setup_requires keyword.
-metadata = SourceFileLoader('metadata', os.path.join(CODE_DIRECTORY, 'metadata.py')).load_module()
+metadata = SourceFileLoader(
+    "metadata", os.path.join(CODE_DIRECTORY, "metadata.py")
+).load_module()
 
 
 ## Miscellaneous helper functions
+
 
 def get_project_files():
     """Retrieve a list of project files, ignoring hidden files.
@@ -66,13 +72,13 @@ def get_project_files():
         return get_git_project_files()
 
     project_files = []
-    for top, subdirs, files in os.walk('.'):
+    for top, subdirs, files in os.walk("."):
         for subdir in subdirs:
-            if subdir.startswith('.'):
+            if subdir.startswith("."):
                 subdirs.remove(subdir)
 
         for f in files:
-            if f.startswith('.'):
+            if f.startswith("."):
                 continue
             project_files.append(os.path.join(top, f))
 
@@ -80,7 +86,7 @@ def get_project_files():
 
 
 def is_git_project():
-    return os.path.isdir('.git')
+    return os.path.isdir(".git")
 
 
 def has_git():
@@ -95,11 +101,12 @@ def get_git_project_files():
     :rtype: :class:`list`
     """
     cached_and_untracked_files = git_ls_files(
-        '--cached',  # All files cached in the index
-        '--others',  # Untracked files
+        "--cached",  # All files cached in the index
+        "--others",  # Untracked files
         # Exclude untracked files that would be excluded by .gitignore, etc.
-        '--exclude-standard')
-    uncommitted_deleted_files = git_ls_files('--deleted')
+        "--exclude-standard",
+    )
+    uncommitted_deleted_files = git_ls_files("--deleted")
 
     # Since sorting of files in a set is arbitrary, return a sorted list to
     # provide a well-defined order to tools like flake8, etc.
@@ -113,7 +120,7 @@ def git_ls_files(*cmd_args):
     :return: set of file names
     :rtype: :class:`set`
     """
-    cmd = ['git', 'ls-files']
+    cmd = ["git", "ls-files"]
     cmd.extend(cmd_args)
     return set(subprocess.check_output(cmd).splitlines())
 
@@ -126,6 +133,7 @@ def print_success_message(message):
     """
     try:
         import colorama
+
         print(colorama.Fore.GREEN + message + colorama.Fore.RESET)
     except ImportError:
         print(message)
@@ -139,8 +147,8 @@ def print_failure_message(message):
     """
     try:
         import colorama
-        print(colorama.Fore.RED + message + colorama.Fore.RESET,
-              file=sys.stderr)
+
+        print(colorama.Fore.RED + message + colorama.Fore.RESET, file=sys.stderr)
     except ImportError:
         print(message, file=sys.stderr)
 
@@ -165,12 +173,12 @@ def _lint():
     # Python 3 compat:
     # - The result of subprocess call outputs are byte strings, meaning we need
     #   to pass a byte string to endswith.
-    project_python_files = [filename for filename in get_project_files()
-                            if filename.endswith(b'.py')]
-    retcode = subprocess.call(
-        ['flake8', '--max-complexity=10'] + project_python_files)
+    project_python_files = [
+        filename for filename in get_project_files() if filename.endswith(b".py")
+    ]
+    retcode = subprocess.call(["flake8", "--max-complexity=10"] + project_python_files)
     if retcode == 0:
-        print_success_message('No style errors')
+        print_success_message("No style errors")
     return retcode
 
 
@@ -182,6 +190,7 @@ def _test():
     # Make sure to import pytest in this function. For the reason, see here:
     # <http://pytest.org/latest/goodpractises.html#integration-with-setuptools-test-commands>  # NOPEP8
     import pytest
+
     # This runs the unit tests.
     # It also runs doctest, but only on the modules in TESTS_DIRECTORY.
     return pytest.main(PYTEST_FLAGS + [TESTS_DIRECTORY])
@@ -218,7 +227,7 @@ python_version_specific_requires = []
 # as of Python >= 2.7 and >= 3.2, the argparse module is maintained within
 # the Python standard library, otherwise we install it as a separate package
 if sys.version_info < (2, 7) or (3, 0) <= sys.version_info < (3, 3):
-    python_version_specific_requires.append('argparse')
+    python_version_specific_requires.append("argparse")
 
 
 # See here for more options:
@@ -232,39 +241,34 @@ setup_dict = dict(
     maintainer_email=metadata.emails[0],
     url=metadata.url,
     description=metadata.description,
-    long_description='README.rst',
+    long_description="README.rst",
     # Find a list of classifiers here:
     # <http://pypi.python.org/pypi?%3Aaction=list_classifiers>
     classifiers=[
-        'Development Status :: 1 - Planning',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: Implementation :: PyPy',
-        'Topic :: Documentation',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: System :: Installation/Setup',
-        'Topic :: System :: Software Distribution',
+        "Development Status :: 1 - Planning",
+        "Environment :: Console",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Documentation",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: System :: Installation/Setup",
+        "Topic :: System :: Software Distribution",
     ],
     packages=find_packages(exclude=(TESTS_DIRECTORY,)),
     install_requires=[
         # your module dependencies
-    ] + python_version_specific_requires,
+    ]
+    + python_version_specific_requires,
     # Allow tests to be run with `python setup.py test'.
-    tests_require=[
-        'pytest==3.0.6',
-        'mock==2.0.0',
-        'flake8==2.1.0',
-    ],
-    cmdclass={'test': TestAllCommand},
+    tests_require=["pytest==3.0.6", "mock==2.0.0", "flake8==2.1.0"],
+    cmdclass={"test": TestAllCommand},
     zip_safe=False,  # don't use eggs
-    entry_points={
-        'console_scripts': ['gandalf = gandalf.console.cli'],
-    }
+    entry_points={"console_scripts": ["gandalf = gandalf.console.cli"]},
 )
 
 
@@ -272,5 +276,5 @@ def main():
     setup(**setup_dict)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
