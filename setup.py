@@ -4,22 +4,8 @@ from __future__ import print_function
 import os
 import sys
 from importlib.machinery import SourceFileLoader
+import unittest
 import subprocess
-
-## Python 2.6 subprocess.check_output compatibility. Thanks Greg Hewgill!
-if "check_output" not in dir(subprocess):
-
-    def check_output(cmd_args, *args, **kwargs):
-        proc = subprocess.Popen(
-            cmd_args, *args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, **kwargs
-        )
-        out, err = proc.communicate()
-        if proc.returncode != 0:
-            raise subprocess.CalledProcessError(args)
-        return out
-
-    subprocess.check_output = check_output
-
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 from distutils import spawn
@@ -187,13 +173,11 @@ def _test():
 
     :return: exit code
     """
-    # Make sure to import pytest in this function. For the reason, see here:
-    # <http://pytest.org/latest/goodpractises.html#integration-with-setuptools-test-commands>  # NOPEP8
-    import pytest
-
-    # This runs the unit tests.
-    # It also runs doctest, but only on the modules in TESTS_DIRECTORY.
-    return pytest.main(PYTEST_FLAGS + [TESTS_DIRECTORY])
+    tests = unittest.TestLoader().discover("gandalf/tests", pattern="test*.py")
+    result = unittest.TextTestRunner(verbosity=2).run(tests)
+    if result.wasSuccessful():
+        return 0
+    sys.exit(result)
 
 
 def _test_all():
