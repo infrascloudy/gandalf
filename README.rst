@@ -1,13 +1,12 @@
-=========================
- Python Project Template
-=========================
+Gandalf
+=======
 
 .. image:: https://travis-ci.org/infrascloudy/python-project-template.svg?branch=master
     :target: https://travis-ci.org/infrascloudy/python-project-template
 
-.. image:: https://codecov.io/gh/infrascloudy/python-project-template/branch/master/graph/badge.svg
-  :target: https://codecov.io/gh/infrascloudy/python-project-template
-  
+.. image:: https://codecov.io/gh/infrascloudy/gandalf/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/infrascloudy/gandalf
+
 .. image:: https://img.shields.io/lgtm/grade/javascript/g/infrascloudy/gandalf.svg
   :target: https://lgtm.com/projects/g/infrascloudy/gandalf/context:javascript
 
