@@ -1,8 +1,8 @@
 Gandalf
 =======
 
-.. image:: https://travis-ci.org/infrascloudy/python-project-template.svg?branch=master
-    :target: https://travis-ci.org/infrascloudy/python-project-template
+.. image:: https://travis-ci.org/infrascloudy/gandalf.svg?branch=master
+    :target: https://travis-ci.org/infrascloudy/gandalf
 
 .. image:: https://codecov.io/gh/infrascloudy/gandalf/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/infrascloudy/gandalf

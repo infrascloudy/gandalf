@@ -1,15 +1,26 @@
 os: linux
 dist: xenial
 language: python
-matrix:
-  include:
-    - python: 3.6
-      env: TOXENV=py36
-    - python: 3.7
-      env: TOXENV=py37
+sudo: true
+addons:
+  postgresql: '10'
+  apt:
+    packages:
+      - postgresql-10-postgis-2.4
+      - postgresql-10-postgis-2.4-scripts
+      - postgresql-client-10
+env:
+  global:
+    - PGPORT=5433
+  matrix:
+    - TOX_ENV=py37\
+before_install:
+  - sudo -u postgres psql -c "CREATE USER gandalf WITH PASSWORD 'gandalf'"
+  - sudo -u postgres psql -c "ALTER ROLE gandalf SUPERUSER"
+  - sudo -u postgres psql -c "CREATE DATABASE gandalf_test"
 install:
   - pip install tox
-  - pip install -r requirements-dev.in
+  - pip install -r requirements.txt
   - pip install codecov
 script:
   - tox
