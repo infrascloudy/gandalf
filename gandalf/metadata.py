@@ -8,7 +8,7 @@ Information describing the project.
 package = "gandalf"
 project = "Providing Blazingly fast & beautifully expressive Web Apps and APIs"
 project_no_spaces = project.replace(" ", "")
-version = "0.4.2-dev"
+version = "0.4.3-dev"
 description = (
     "Simple and rapid application development framework, built on top of Flask."
     " includes detailed security, auto CRUD generation for your models,"
