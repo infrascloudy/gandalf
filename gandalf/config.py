@@ -15,7 +15,7 @@ class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     if "TRAVIS" in os.environ:
         SQLALCHEMY_DATABASE_URI = (
-            "postgres://gandalf:gandalf@localhost:5433/gandalf_test"
+            "postgres://gandalf:gandalf@localhost:5432/gandalf_test"
         )
 
 
@@ -26,7 +26,7 @@ class TestingConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_TEST_URL")
     if "TRAVIS" in os.environ:
         SQLALCHEMY_DATABASE_URI = (
-            "postgres://gandalf:gandalf@localhost:5433/gandalf_test"
+            "postgres://gandalf:gandalf@localhost:5432/gandalf_test"
         )
 
 
@@ -36,5 +36,5 @@ class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     if "TRAVIS" in os.environ:
         SQLALCHEMY_DATABASE_URI = (
-            "postgres://gandalf:gandalf@localhost:5433/gandalf_test"
+            "postgres://gandalf:gandalf@localhost:5432/gandalf_test"
         )
