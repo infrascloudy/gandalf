@@ -8,7 +8,7 @@ Information describing the project.
 package = "gandalf"
 project = "Providing Blazingly fast & beautifully expressive Web Apps and APIs"
 project_no_spaces = project.replace(" ", "")
-version = "0.1.2"
+version = "0.1.3"
 description = "Blazingly fast & beautifully expressive Web Apps and APIs"
 authors = ["Infrascloudy"]
 authors_string = ", ".join(authors)
