@@ -13,7 +13,7 @@ babel==2.6.0              # via sphinx
 bleach==3.1.0             # via readme-renderer
 certifi==2019.3.9         # via requests
 chardet==3.0.4            # via requests
-click==7.0                # via pip-tools
+click==7.0                # via flask, pip-tools
 colorama==0.3.7
 configparser==3.7.4
 coverage==4.5.3           # via pytest-cov
@@ -22,9 +22,11 @@ entrypoints==0.3          # via flake8
 enum34==1.1.6
 filelock==3.0.10          # via tox
 flake8==3.7.7
+flask==1.1.1
 idna==2.8                 # via requests
 imagesize==1.1.0          # via sphinx
 importlib-metadata==0.17  # via pluggy, pytest, tox
+itsdangerous==1.1.0       # via flask
 jinja2==2.10.1
 markupsafe==1.1.1
 mccabe==0.6.1
@@ -68,4 +70,8 @@ virtualenv==16.4.3        # via tox
 watchdog==0.8.3
 wcwidth==0.1.7            # via pytest
 webencodings==0.5.1       # via bleach
+werkzeug==0.15.5          # via flask
 zipp==0.5.1               # via importlib-metadata
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools==41.0.1        # via sphinx, twine
