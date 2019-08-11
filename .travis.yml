@@ -1,5 +1,4 @@
 os: linux
-dist: xenial
 language: python
 sudo: true
 addons:
@@ -13,7 +12,7 @@ env:
   global:
     - PGPORT=5433
   matrix:
-    - TOX_ENV=py37\
+    - TOX_ENV=py37
 before_install:
   - sudo -u postgres psql -c "CREATE USER gandalf WITH PASSWORD 'gandalf'"
   - sudo -u postgres psql -c "ALTER ROLE gandalf SUPERUSER"
