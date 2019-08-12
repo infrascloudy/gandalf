@@ -165,7 +165,7 @@ def commit():
 @task
 def coverage():
     """Run tests and show test coverage report."""
-    subprocess.call(['flask', 'cov'])
+    subprocess.call(["flask", "cov"])
 
 
 @task  # NOQA
