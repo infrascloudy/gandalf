@@ -19,8 +19,6 @@ from setup import (
     _test_all,
     CODE_DIRECTORY,
     DOCS_DIRECTORY,
-    TESTS_DIRECTORY,
-    PYTEST_FLAGS,
 )
 
 from paver.easy import options, task, needs, consume_args
