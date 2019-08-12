@@ -6,11 +6,17 @@ import unittest
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+import coverage
 
 # load dotenv in the base root
 APP_ROOT = os.path.join(os.path.dirname(__file__), "..")  # refers to application_top
 dotenv_path = os.path.join(APP_ROOT, ".env")
 load_dotenv(dotenv_path)
+
+COV = coverage.coverage(
+    branch=True, include="gandalf/*", omit=["gandalf/tests/*", "gandalf/config.py"]
+)
+COV.start()
 
 db = SQLAlchemy()
 from gandalf.models.user import User
@@ -63,3 +69,18 @@ def register_commands(app):
         db.session.add(User(username="michael", email="hermanmu@gmail.com"))
         db.session.add(User(username="michaelherman", email="michael@mherman.org"))
         db.session.commit()
+
+    @app.cli.command("cov")
+    def cov():
+        """Runs the unit tests with coverage."""
+        tests = unittest.TestLoader().discover("gandalf/tests")
+        result = unittest.TextTestRunner(verbosity=2).run(tests)
+        if result.wasSuccessful():
+            COV.stop()
+            COV.save()
+            print("Coverage Summary:")
+            COV.report()
+            COV.html_report()
+            COV.erase()
+            return 0
+        sys.exit(result)

@@ -26,6 +26,7 @@ from setup import (
 from paver.easy import options, task, needs, consume_args
 from paver.setuputils import install_distutils_tasks
 
+
 options(setup=setup_dict)
 
 install_distutils_tasks()
@@ -164,20 +165,7 @@ def commit():
 @task
 def coverage():
     """Run tests and show test coverage report."""
-    try:
-        import pytest_cov  # NOQA
-    except ImportError:
-        print_failure_message(
-            "Install the pytest coverage plugin to use this task, "
-            "i.e., `pip install pytest-cov'."
-        )
-        raise SystemExit(1)
-    import pytest
-
-    pytest.main(
-        PYTEST_FLAGS
-        + ["--cov", CODE_DIRECTORY, "--cov-report", "term-missing", TESTS_DIRECTORY]
-    )
+    subprocess.call(['flask', 'cov'])
 
 
 @task  # NOQA
