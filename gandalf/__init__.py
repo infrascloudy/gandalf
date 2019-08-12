@@ -4,6 +4,7 @@ import os
 import sys
 import unittest
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import coverage
@@ -19,6 +20,8 @@ COV = coverage.coverage(
 COV.start()
 
 db = SQLAlchemy()
+migrate = Migrate()
+
 from gandalf.models.user import User
 
 
@@ -27,6 +30,7 @@ def create_app(script_info=None):
     app_settings = os.getenv("APP_SETTINGS")
     app.config.from_object(app_settings)
     db.init_app(app)
+    migrate.init_app(app, db)
 
     register_blueprints(app)
     register_commands(app)

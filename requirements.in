@@ -1,6 +1,7 @@
 Flask
 Flask-Babel
 Flask-JWT-Extended
+Flask-Migrate
 Flask-Restful
 Flask-SQLAlchemy
 Flask-Testing
