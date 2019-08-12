@@ -12,6 +12,7 @@ env:
   global:
     - PGPORT=5432
   matrix:
+    - TOX_ENV=py36
     - TOX_ENV=py37
 before_install:
   - sudo -u postgres psql -c "CREATE USER gandalf WITH PASSWORD 'gandalf'"
