@@ -27,11 +27,11 @@ class User(db.Model):
 
     @property
     def password(self):
-        raise AttributeError('password: write-only field')
+        raise AttributeError("password: write-only field")
 
     @password.setter
     def password(self, password):
-        self.password_hash = generate_password_hash(password).decode('utf-8')
+        self.password_hash = generate_password_hash(password).decode("utf-8")
 
     def check_password(self, password):
         check_password_hash(self.password_hash, password)
