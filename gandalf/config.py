@@ -7,6 +7,8 @@ class BaseConfig:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "my_precious"
+    JWT_BLACKLIST_ENABLED = True
+    JWT_ACCESS_TOKEN_EXPIRES = 15 * 60
 
 
 class DevelopmentConfig(BaseConfig):
