@@ -2,7 +2,7 @@ import json
 import unittest
 
 from gandalf import db
-from gandalf.models.user import User
+from gandalf.database.models.user import User
 from gandalf.tests.base import BaseTestCase
 
 

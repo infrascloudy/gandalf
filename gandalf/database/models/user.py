@@ -2,10 +2,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.sql import func
 
 from gandalf import db
+from gandalf.database.uuid_type import UUID
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    id = db.Column(UUID, primary_key=True, nullable=False)
     username = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(128), nullable=False)
     password_hash = db.Column(db.String(100))

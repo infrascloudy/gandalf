@@ -3,7 +3,7 @@ from flask import Blueprint, request
 from flask_restful import Resource, Api
 
 from gandalf import db
-from gandalf.models.user import User
+from gandalf.database.models.user import User
 
 
 users_blueprint = Blueprint("users", __name__, template_folder="./templates")
